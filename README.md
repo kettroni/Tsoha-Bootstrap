@@ -1,4 +1,4 @@
-# Tietokantasovelluksen esittelysivu
+# Tietokantasovelluksen esittelysivu: Muistilista
 
 Yleisiä linkkejä:
 
