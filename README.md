@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://kettroni.users.cs.helsinki.fi/tsoha/)
-* [Linkki dokumentaatiooni](Tsoha-Bootstrap/doc/Muistilista dokumentaatio.pdf)
+* [Linkki dokumentaatiooni](https://github.com/kettroni/Tsoha-Bootstrap/blob/master/doc/Muistilista%20dokumentaatio.pdf)
 
 ## Muistilista
 
