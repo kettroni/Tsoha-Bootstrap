@@ -7,13 +7,13 @@ CREATE TABLE Account(
 
 CREATE TABLE Tasklist(
   id SERIAL PRIMARY KEY,
-  accont_id INTEGER REFERENCES Account(id),
+  account_id INTEGER REFERENCES Account,
   name varchar(50) NOT NULL
 );
 
 CREATE TABLE Task(
   id SERIAL PRIMARY KEY,
-  tasklist_id INTEGER REFERENCES Tasklist(id),
+  tasklist_id INTEGER REFERENCES Tasklist,
   name varchar(50) NOT NULL,
   done boolean DEFAULT FALSE,
   description varchar(400),
@@ -25,7 +25,7 @@ CREATE TABLE Category(
   name varchar(50) NOT NULL
 );
 
-CREATE TABLE Connect(
-  task_id INTEGER REFERENCES Task(id),
-  category_id INTEGER REFERENCES Category(id)
+CREATE TABLE Taskcategory(
+  task_id INTEGER REFERENCES Task,
+  category_id INTEGER REFERENCES Category
 );
