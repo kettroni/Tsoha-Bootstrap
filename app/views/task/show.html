@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muistilistan muistilista asia {{task.name}}</h1>
+  <h2>Nimi</h2>
+    <p>{{task.name}}</p>
+  <h2>Lisätty</h2>
+    <p>{{task.added}}</p>
+  <h2>Suoritettu</h2>
+    <p>
+      {% if task.done %}
+          <label class="label label-success">KYLLÄ
+      {% else %}
+          <label class="label label-danger">EI
+      {% endif %}
+    </p>
+  <h2>Prioriteetti</h2>
+    <p>{{task.priority}}</p>
+  <h2>Kategoriat</h2>
+    <p>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</p>
+  <p><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></p>
+{% endblock %}

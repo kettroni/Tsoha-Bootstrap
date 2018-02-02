@@ -1,7 +1,23 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    TaskController::index();
+  });
+
+  $routes->get('/task', function(){
+    TaskController::index();
+  });
+
+  $routes->post('/task', function(){
+    TaskController::store();
+  });
+
+  $routes->get('/task/new', function(){
+    TaskController::create();
+  });
+
+  $routes->get('/task/:id', function($id){
+    TaskController::show($id);
   });
 
   $routes->get('/hiekkalaatikko', function() {

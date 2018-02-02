@@ -1,15 +1,15 @@
 <?php
-
   class HelloWorldController extends BaseController{
 
-    public static function index(){
-      // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-   	  View::make('home.html');
+    public static function sandbox(){
+      $eka = Task::find(1);
+      $tasks = Task::all();
+      Kint::dump($tasks);
+      Kint::dump($eka);
     }
 
-    public static function sandbox(){
-      // Testaa koodiasi täällä
-      View::make('helloworld.html');
+    public static function helloworld() {
+      View::make('home.html');
     }
 
     public static function note_list(){
@@ -27,4 +27,5 @@
     public static function account_lists(){
       View::make('suunnitelmat/account_lists.html');
     }
+
   }

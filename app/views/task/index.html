@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjän käyttäjä muistilista muistilista</h1>
+
+  <p>
+    <a href="{{base_path}}/task/new" class="btn btn-success">Lisää asia</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Luomispäivä</th>
+        <th>Suoritettu</th>
+        <th>Prioriteetti</th>
+        <th>Kategoriat</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td><a href="{{base_path}}/task/{{task.id}}"</a>{{task.name}}</td>
+          <td>{{task.added}}</td>
+          <td>
+            {% if task.done %}
+                <label class="label label-success">KYLLÄ
+              {% else %}
+                <label class="label label-danger">EI
+              {% endif %}
+          </td>
+          <td>{{task.priority}}</td>
+          <td>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

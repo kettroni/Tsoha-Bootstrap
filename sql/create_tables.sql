@@ -17,7 +17,8 @@ CREATE TABLE Task(
   name varchar(50) NOT NULL,
   done boolean DEFAULT FALSE,
   description varchar(400),
-  added DATE
+  added DATE,
+  priority INTEGER
 );
 
 CREATE TABLE Category(
