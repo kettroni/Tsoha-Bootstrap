@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
+
+  {% if user_logged_in %}
   <h1>Muistilistan muistilista asia {{task.name}}</h1>
+
+  {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
   <h2>Nimi</h2>
     <p>{{task.name}}</p>
   <h2>Lisätty</h2>
@@ -13,9 +18,14 @@
           <label class="label label-danger">EI
       {% endif %}
     </p>
+  <h2>Kuvaus</h2>
+    <p>{{task.description}}</p>
   <h2>Prioriteetti</h2>
     <p>{{task.priority}}</p>
   <h2>Kategoriat</h2>
     <p>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</p>
   <p><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></p>
+  {% else %}
+    {{forms.not_signed_in()}}
+  {% endif %}
 {% endblock %}

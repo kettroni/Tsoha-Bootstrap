@@ -4,6 +4,22 @@
     TaskController::index();
   });
 
+  $routes->post('/logout', function() {
+    $params = $_POST;
+    Kint::dump($params['id']);
+
+
+    BaseController::log_out($params['id']);
+  });
+
+  $routes->get('/login', function(){
+    AccountController::login();
+  });
+
+  $routes->post('/login', function(){
+    AccountController::handle_login();
+  });
+
   $routes->get('/task', function(){
     TaskController::index();
   });
@@ -20,6 +36,18 @@
     TaskController::show($id);
   });
 
+  $routes->get('/task/:id/edit', function($id){
+    TaskController::edit($id);
+  });
+
+  $routes->post('/task/:id/edit', function($id){
+    TaskController::update($id);
+  });
+
+  $routes->post('/task/:id/destroy', function($id){
+    TaskController::destroy($id);
+  });
+
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
@@ -30,10 +58,6 @@
 
   $routes->get('/note_edit', function() {
     HelloWorldController::note_edit();
-  });
-
-  $routes->get('/login', function() {
-    HelloWorldController::login();
   });
 
   $routes->get('/account_lists', function() {

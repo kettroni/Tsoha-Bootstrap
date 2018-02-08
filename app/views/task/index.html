@@ -1,6 +1,16 @@
 {% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
 {% block content %}
-  <h1>Käyttäjän käyttäjä muistilista muistilista</h1>
+
+  {% if user_logged_in %}
+  <form method="post" action="{{base_path}}/logout">
+    <input type="hidden" name="id" value="{{user_logged_in.id}}">
+    <h2>Käyttäjä: {{user_logged_in.name}}</h2>
+    <button type="submit">Kirjaudu ulos</button>
+  </form>
+    <h1>Käyttäjän {{user_logged_in.name}} muistilista</h1>
+
+
 
   <p>
     <a href="{{base_path}}/task/new" class="btn btn-success">Lisää asia</a>
@@ -12,8 +22,10 @@
         <th>Nimi</th>
         <th>Luomispäivä</th>
         <th>Suoritettu</th>
+        <th>Kuvaus</th>
         <th>Prioriteetti</th>
         <th>Kategoriat</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -30,11 +42,19 @@
                 <label class="label label-danger">EI
               {% endif %}
           </td>
+          <td>
+            {{task.description}}
+          </td>
           <td>{{task.priority}}</td>
           <td>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></td>
+          <td>{{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% else %}
+    {{forms.not_signed_in()}}
+  {% endif %}
+
 {% endblock %}

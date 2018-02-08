@@ -1,0 +1,12 @@
+{% macro destroy_button(action, text) %}
+  <form method="post" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
+  </form>
+{% endmacro %}
+
+{% macro not_signed_in() %}
+  <h1>ET OLE KIRJAUTUNUT</h1>
+  <form method="get" action="{{base_path}}/tsoha/login">
+    <button onAction=>Kirjautumissivulle</button>
+  </form>
+{% endmacro %}

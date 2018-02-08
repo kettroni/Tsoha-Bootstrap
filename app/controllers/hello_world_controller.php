@@ -2,10 +2,14 @@
   class HelloWorldController extends BaseController{
 
     public static function sandbox(){
-      $eka = Task::find(1);
-      $tasks = Task::all();
-      Kint::dump($tasks);
-      Kint::dump($eka);
+      $doom = new Task(array(
+        'name' => 'dos',
+        'description' => 'Boom, boom!',
+        'priority' => 41
+      ));
+      $errors = $doom->errors();
+
+      Kint::dump($errors);
     }
 
     public static function helloworld() {

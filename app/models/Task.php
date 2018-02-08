@@ -1,8 +1,21 @@
 <?php
 class Task extends BaseModel{
   public $id, $tasklist_id, $name, $done, $description, $added, $priority;
+
   public function __construct($attributes){
     parent::__construct($attributes);
+
+    $this->validators = array('validate_name', 'validate_priority');
+  }
+
+  public function validate_priority(){
+    $errors = $this->validate_integer($this->priority);
+    return $errors;
+  }
+
+  public function validate_name(){
+    $errors = $this->validate_string_length($this->name, 3);
+    return $errors;
   }
 
   public static function all(){
@@ -47,6 +60,8 @@ class Task extends BaseModel{
     return null;
   }
 
+
+
   public function save() {
 
     $query = DB::connection()->prepare('INSERT INTO Task (name, priority, description, added) VALUES (:name, :priority, :description, NOW()) RETURNING id');
@@ -57,5 +72,21 @@ class Task extends BaseModel{
 
     $this->id = $row['id'];
   }
+
+  public function update($id) {
+
+    $query = DB::connection()->prepare('UPDATE Task SET name = :name, description = :description, priority = :priority, done = :done, added = :added WHERE id=:id');
+
+    $query->execute(array('id' => $id, 'name' => $this->name, 'description' => $this->description, 'priority' => $this->priority, 'done' => $this->done, 'added' => $this->added));
+  }
+
+  public function destroy($id) {
+
+      $query = DB::connection()->prepare('DELETE FROM Task WHERE id=:id');
+
+      $query->execute(array('id' => $id));
+
+  }
+
 
 }
