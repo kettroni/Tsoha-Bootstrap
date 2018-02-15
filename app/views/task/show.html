@@ -3,9 +3,9 @@
 {% block content %}
 
   {% if user_logged_in %}
-  <h1>Muistilistan muistilista asia {{task.name}}</h1>
+  <h1>Muistilistan {{tasklist.name}} asia {{task.name}}</h1>
 
-  {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+  {{forms.destroy_button("#{base_path}/{tasklist.id}/task/#{tasklist.id}/{task.id}/destroy")}}
   <h2>Nimi</h2>
     <p>{{task.name}}</p>
   <h2>Lisätty</h2>
@@ -24,7 +24,8 @@
     <p>{{task.priority}}</p>
   <h2>Kategoriat</h2>
     <p>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</p>
-  <p><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></p>
+  <p><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task/{{task.id}}/edit">Muokkaa</a></p>
+  <p><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task">Takaisin muistilistaan</a><p>
   {% else %}
     {{forms.not_signed_in()}}
   {% endif %}

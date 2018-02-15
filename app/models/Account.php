@@ -9,12 +9,12 @@ class Account extends BaseModel{
   }
 
   public function validate_name(){
-    $errors = $this->validate_string_length($this->name, 3);
+    $errors = $this->validate_accountname($this->name, 3);
     return $errors;
   }
 
   public function validate_password(){
-    $errors = $this->validate_string_length($this->password, 3);
+    $errors = $this->validate_password_length($this->password, 3);
     return $errors;
   }
 
@@ -33,6 +33,14 @@ class Account extends BaseModel{
       return $account;
     }
     return null;
+  }
+
+  public function save() {
+    $query = DB::connection()->prepare('INSERT INTO Account (name, password) VALUES (:name, :password) RETURNING id');
+    $query->execute(array('name' => $this->name, 'password' => $this->password));
+
+    $row = $query->fetch();
+    $this->id = $row['id'];
   }
 
   public static function authenticate($name, $password) {

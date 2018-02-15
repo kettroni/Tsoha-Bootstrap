@@ -2,25 +2,29 @@
 
 class TaskController extends BaseController {
 
-  public static function index() {
-    $tasks = Task::all();
+  public static function index($tasklist_id) {
+    $tasks = Task::all($tasklist_id);
+    $tasklist = Tasklist::find($tasklist_id);
 
-    View::make('task/index.html', array('tasks' => $tasks));
+    View::make('task/index.html', array('tasks' => $tasks, 'tasklist' => $tasklist));
   }
 
-  public static function show($id) {
+  public static function show($tasklist_id, $id) {
     $task = Task::find($id);
-    View::make('task/show.html', array('task' => $task));
+    $tasklist = Tasklist::find($tasklist_id);
+    View::make('task/show.html', array('task' => $task, 'tasklist' => $tasklist));
   }
 
-  public static function create() {
-    View::make('task/new.html');
+  public static function create($tasklist_id) {
+    $tasklist = Tasklist::find($tasklist_id);
+    View::make('task/new.html', array('tasklist' => $tasklist));
   }
 
-  public static function store(){
+  public static function store($tasklist_id){
       $params = $_POST;
       $attributes = array(
         'name' => $params['name'],
+        'tasklist_id' => $tasklist_id,
         'description' => $params['description'],
         'priority' => $params['priority']
       );
@@ -30,13 +34,13 @@ class TaskController extends BaseController {
       if(count($errors) == 0){
         $task->save();
 
-        Redirect::to('/task/' . $task->id, array('message' => 'Tallennettu!'));
+        Redirect::to('/' . $tasklist_id . '/task', array('message' => 'Tallennettu!'));
       }else{
         View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
       }
     }
 
-    public static function update($id){
+    public static function update($tasklist_id, $id){
       $params = $_POST;
       if (!isset ($params['done'])) {
         $params['done'] = 0;
@@ -58,19 +62,20 @@ class TaskController extends BaseController {
       }else{
         $task->update($id);
 
-        Redirect::to('/task/' . $id, array('message' => 'Tapahtumaa muokattu onnistuneesti'));
+        Redirect::to('/' . $tasklist_id .'/task', array('message' => 'Tapahtumaa muokattu onnistuneesti'));
       }
     }
 
-    public static function edit($id){
+    public static function edit($tasklist_id, $id){
       $task = Task::find($id);
-      View::make('task/edit.html', array('task' => $task));
+      $tasklist = Tasklist::find($tasklist_id);
+      View::make('task/edit.html', array('task' => $task, 'tasklist' => $tasklist));
     }
 
-    public static function destroy($id){
+    public static function destroy($tasklist_id, $id){
       $task = Task::find($id);
       $task->destroy($id);
-      Redirect::to('/task', array('message' => 'Poistettu onnistuneesti!'));
+      Redirect::to('/' . $tasklist_id . '/task', array('message' => 'Poistettu onnistuneesti!'));
     }
 
 }

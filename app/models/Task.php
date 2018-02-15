@@ -18,25 +18,26 @@ class Task extends BaseModel{
     return $errors;
   }
 
-  public static function all(){
-   $query = DB::connection()->prepare('SELECT * FROM Task');
-   $query->execute();
-   $rows = $query->fetchAll();
-   $tasks = array();
+  public static function all($tasklist_id){
 
-   foreach($rows as $row){
-     $tasks[] = new Task(array(
-       'id' => $row['id'],
-       'tasklist_id' => $row['tasklist_id'],
-       'name' => $row['name'],
-       'done' => $row['done'],
-       'description' => $row['description'],
-       'added' => $row['added'],
-       'priority' => $row['priority']
-     ));
+    $query = DB::connection()->prepare('SELECT * FROM Task WHERE tasklist_id = :tasklist_id');
+    $query->execute(array('tasklist_id' => $tasklist_id));
+    $rows = $query->fetchAll();
+    $tasks = array();
+
+    foreach($rows as $row){
+      $tasks[] = new Task(array(
+        'id' => $row['id'],
+        'tasklist_id' => $row['tasklist_id'],
+        'name' => $row['name'],
+        'done' => $row['done'],
+        'description' => $row['description'],
+        'added' => $row['added'],
+        'priority' => $row['priority']
+      ));
     }
 
-   return $tasks;
+    return $tasks;
   }
 
   public static function find($id) {
@@ -64,9 +65,9 @@ class Task extends BaseModel{
 
   public function save() {
 
-    $query = DB::connection()->prepare('INSERT INTO Task (name, priority, description, added) VALUES (:name, :priority, :description, NOW()) RETURNING id');
+    $query = DB::connection()->prepare('INSERT INTO Task (name, tasklist_id, priority, description, added) VALUES (:name, :tasklist_id, :priority, :description, NOW()) RETURNING id');
 
-    $query->execute(array('name' => $this->name, 'description' => $this->description, 'priority' => $this->priority));
+    $query->execute(array('name' => $this->name, 'tasklist_id' => $this->tasklist_id, 'description' => $this->description, 'priority' => $this->priority));
 
     $row = $query->fetch();
 
@@ -80,10 +81,9 @@ class Task extends BaseModel{
     $query->execute(array('id' => $id, 'name' => $this->name, 'description' => $this->description, 'priority' => $this->priority, 'done' => $this->done, 'added' => $this->added));
   }
 
-  public function destroy($id) {
-
+  public static function destroy($id) {
+      TaskCategory::destroyByTask($id);
       $query = DB::connection()->prepare('DELETE FROM Task WHERE id=:id');
-
       $query->execute(array('id' => $id));
 
   }

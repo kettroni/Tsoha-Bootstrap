@@ -8,12 +8,13 @@
     <h2>Käyttäjä: {{user_logged_in.name}}</h2>
     <button type="submit">Kirjaudu ulos</button>
   </form>
-    <h1>Käyttäjän {{user_logged_in.name}} muistilista</h1>
+    <h1>Käyttäjän {{user_logged_in.name}} muistilista "{{tasklist.name}}"</h1>
 
 
 
   <p>
-    <a href="{{base_path}}/task/new" class="btn btn-success">Lisää asia</a>
+    <a href="{{base_path}}/{{tasklist.id}}/task/new" class="btn btn-success">Lisää asia</a>
+    <a href="{{base_path}}" class="btn btn-default">Palaa omalle etusivulle</a>
   </p>
 
   <table class="table table-striped table-bordered">
@@ -33,7 +34,7 @@
     <tbody>
       {% for task in tasks %}
         <tr>
-          <td><a href="{{base_path}}/task/{{task.id}}"</a>{{task.name}}</td>
+          <td><a href="{{base_path}}/{{tasklist.id}}/task/{{task.id}}"</a>{{task.name}}</td>
           <td>{{task.added}}</td>
           <td>
             {% if task.done %}
@@ -47,9 +48,8 @@
           </td>
           <td>{{task.priority}}</td>
           <td>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a></td>
-          <td>{{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}</td>
-        </tr>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task/{{task.id}}/edit">Muokkaa</a></td>
+          <td>{{forms.destroy_button("#{base_path}/#{tasklist.id}/task/#{task.id}/destroy")}}</td>
       {% endfor %}
     </tbody>
   </table>

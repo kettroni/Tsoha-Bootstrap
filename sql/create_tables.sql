@@ -7,13 +7,13 @@ CREATE TABLE Account(
 
 CREATE TABLE Tasklist(
   id SERIAL PRIMARY KEY,
-  account_id INTEGER REFERENCES Account,
+  account_id INTEGER REFERENCES Account ON DELETE CASCADE,
   name varchar(50) NOT NULL
 );
 
 CREATE TABLE Task(
   id SERIAL PRIMARY KEY,
-  tasklist_id INTEGER REFERENCES Tasklist,
+  tasklist_id INTEGER REFERENCES Tasklist ON DELETE CASCADE,
   name varchar(50) NOT NULL,
   done boolean DEFAULT FALSE,
   description varchar(400),
@@ -27,6 +27,6 @@ CREATE TABLE Category(
 );
 
 CREATE TABLE Taskcategory(
-  task_id INTEGER REFERENCES Task,
-  category_id INTEGER REFERENCES Category
+  task_id INTEGER REFERENCES Task ON DELETE CASCADE,
+  category_id INTEGER REFERENCES Category ON DELETE CASCADE
 );

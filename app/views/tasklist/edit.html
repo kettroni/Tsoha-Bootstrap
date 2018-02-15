@@ -2,8 +2,7 @@
 {% import "macros/forms.html" as forms %}
 {% block content %}
   {% if user_logged_in %}
-    <h1>Lisää uusi asia</h1>
-
+    <h1>Muokkaa muistilistaa "{{tasklist.name}}"</h1>
 
     {% if errors %}
       <div class="alert alert-danger">
@@ -14,24 +13,19 @@
         </ul>
       </div>
     {% endif %}
-    <form method="post" action="{{base_path}}/{{tasklist.id}}/task">
+
+    {{forms.destroy_button("#{base_path}/tasklist/#{tasklist.id}/destroy")}}
+    <form method="post" action="{{base_path}}/tasklist/{{tasklist.id}}/edit">
       <div class="form-group">
         <label>Nimi</label>
-        <input type="text" class="form-control" name="name">
-      </div>
-      <div class="form-group">
-        <label>Prioriteetti</label>
-        <input type="number" class="form-control" name="priority">
-      </div>
-      <div class="form-group">
-        <label>Kuvaus</label>
-        <textarea class="form-control" name="description"></textarea>
+        <input type="text" class="form-control" value='{{tasklist.name}}' name="name">
+        <input type="hidden" class="form-control" name="account_id" value="{{user_logged_in.id}}">
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>
+        <p><a class="btn btn-default btn-sm" href="{{base_path}}">Peruuta</a><p>
       </div>
     </form>
-    <p><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task">Peruuta</a><p>
     {% else %}
       {{forms.not_signed_in()}}
     {% endif %}

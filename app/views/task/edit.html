@@ -14,8 +14,8 @@
       </div>
     {% endif %}
 
-    {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
-    <form method="post" action="{{base_path}}/task/{{task.id}}/edit">
+    {{forms.destroy_button("#{base_path}/{tasklist.id}/task/#{tasklist.id}/{task.id}/destroy")}}
+    <form method="post" action="{{base_path}}/{{tasklist.id}}/task/{{task.id}}/edit">
       <div class="checkbox">
         <label>
           <input type="checkbox" name="done" value="1">
@@ -40,7 +40,7 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>
-        <button href="{{base_path}}">Peruuta</button>
+        <p><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task">Peruuta</a><p>
       </div>
     </form>
     {% else %}
