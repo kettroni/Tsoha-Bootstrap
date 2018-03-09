@@ -91,7 +91,7 @@
   });
 
   $routes->post('/:tasklist_id/task/:id/destroy', function($tasklist_id, $id){
-    TaskController::destroy($id);
+    TaskController::destroy($tasklist_id, $id);
   });
 
   $routes->post('/category/:id/destroy', function($id) {

@@ -45,6 +45,10 @@
       if($integer == null){
         $errors[] = 'Anna prioriteetti!';
       }
+      $intext = (string) $integer;
+      if (strlen($intext) > 7) {
+        $errors[] = 'Prioriteetti on liian suuri (yli seitsemän numeroa pitkä)';
+      }
 
       return $errors;
     }

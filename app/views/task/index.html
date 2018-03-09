@@ -47,7 +47,7 @@
             {{task.description}}
           </td>
           <td>{{task.priority}}</td>
-          <td>TÄNNE TULEE KATEGORIAT LIITOSTAULUN AVULLA</td>
+          <td>{{categories[task.name]}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/{{tasklist.id}}/task/{{task.id}}/edit">Muokkaa</a></td>
           <td>{{forms.destroy_button("#{base_path}/#{tasklist.id}/task/#{task.id}/destroy")}}</td>
       {% endfor %}

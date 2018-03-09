@@ -45,6 +45,24 @@ class Category extends BaseModel{
     return null;
   }
 
+  public static function findByName($name) {
+    $query = DB::connection()->prepare('SELECT * FROM Category WHERE name = :name LIMIT 1');
+    $query->execute(array('name' => $name));
+    $row = $query->fetch();
+
+    if($row) {
+      $category = new Category(array(
+        'id' => $row['id'],
+        'name' => $row['name']
+      ));
+      Kint::dump($category);
+      return $category;
+    }
+    return null;
+  }
+
+
+
 
 
   public function save() {

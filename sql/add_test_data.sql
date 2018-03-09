@@ -5,7 +5,6 @@ INSERT INTO Task (name, description, added, tasklist_id, priority) VALUES ('Ensi
    NOW(), 1, 4);
 INSERT INTO Category (name) VALUES ('Kategoriani');
 INSERT INTO Taskcategory (task_id, category_id) VALUES (1, 1);
-
 INSERT INTO Account (name, password) VALUES ('Toinen', 'Salainen');
 INSERT INTO Tasklist (name, account_id) VALUES ('Tämä onkin toisen', 2);
 INSERT INTO Task (name, description, added, tasklist_id, priority) VALUES ('Asia1', 'Asia numero 1'
