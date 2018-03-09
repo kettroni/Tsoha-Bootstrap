@@ -7,6 +7,7 @@ Yleisiä linkkejä:
 * [Linkki kirjautumissivulle](http://kettroni.users.cs.helsinki.fi/tsoha/login)
 * Testikäyttäjät: Käyttäjätunnus: Testaaja      Salasana: Salainen
                   Käyttäjätunnus: Toinen        Salasana: Salainen
+* Huomautus: Voit myös luoda oman käyttäjän rekisteröitymällä rekisteröinti sivulta (linkki kirjautumissivulla).
 * [Linkki esimerkki käyttäjän etusivulle](http://kettroni.users.cs.helsinki.fi/tsoha/account_lists)
 * [Linkki esimerkki muistilistasivulle](http://kettroni.users.cs.helsinki.fi/tsoha/note_list)
 * [Linkki esimerkki tapahtumanmuokkaus sivulle](http://kettroni.users.cs.helsinki.fi/tsoha/note_edit)
